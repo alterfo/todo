@@ -1,5 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #main
+    a#btn-remove-all.btn-common(href='#') Начать новый список
+    div
+      input#new-todo(placeholder="Что нужно делать?")
+      a#btn-enter.btn-common(href="#")
+    div
+      ol#list-not-ready.ui-sortable
+    div
+      ul#list-ready
+    a#btn-remove-completed.btn-common(href="#") Удалить выполненные задачи

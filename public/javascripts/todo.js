@@ -2,13 +2,13 @@
 
 function saveState() {
 
-	var notReady = [];
-	var ready = [];
+/*	var notReady = [];
+	var ready = [];*/
 
 	var notReady2 = [];
 	var ready2 = [];
 
-	$('#list-not-ready li.task span').each(function (i, el) {
+/*	$('#list-not-ready li.task span').each(function (i, el) {
 		var val = escape($(el).text());
 		notReady.push(val);
 	});
@@ -18,7 +18,7 @@ function saveState() {
 		ready.push(val);
 	});
 
-	var result = notReady.join('&') + '|' + ready.join('&');
+	var result = notReady.join('&') + '|' + ready.join('&');*/
 
 
 	$('#list-not-ready li.task span').each(function (i, el) {
@@ -37,7 +37,7 @@ function saveState() {
 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:4000/new",
+		url: "http://localhost:4000/",
 		contentType: "application/json",
 		data: JSON.stringify(result2),
 		success: function(data) {
@@ -48,11 +48,11 @@ function saveState() {
         }
 	});
 
-
+/*
 	var time = new Date();
 	time.setTime(time.getTime() + 2678400000);
 	document.cookie = 'data=' + result + "; expires=" + time.toGMTString();
-}
+*/}
 
 function loadState() {
 
@@ -161,5 +161,5 @@ $(function () {
 		return false;
 	});
 
-	loadState();
+	 loadState();
 });

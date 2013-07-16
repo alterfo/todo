@@ -4,6 +4,7 @@
  */
 
 var express = require('express')
+  , mongoose = require('mongoose')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
@@ -22,6 +23,16 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+mongoose.connect("mongodb://localhost/todo");
+
+var TodoSchema = new mongoose.Schema({
+	username: String,
+	ready: [{body: String}],
+	notReady: [{body: String}]
+}),
+	Todo = mongoose.model('Todo', TodoSchema);
+
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -31,7 +42,7 @@ app.get('/', routes.index);
 
 
 
-app.post('/new', function(req, res) {
+app.post('/', function(req, res) {
 	console.log('body: ' + JSON.stringify(req.body));
 	res.send(req.body);
 });

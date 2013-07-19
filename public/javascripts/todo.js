@@ -41,7 +41,7 @@ function saveState() {
 		contentType: "application/json",
 		data: JSON.stringify(result2),
 		success: function(data) {
-			$('#echoResult').html("You said: " + JSON.stringify(data));
+			$('#echoResult').html("Данные приняты сервером: " + JSON.stringify(data));
 		},
 		error: function(err){
             $("#echoResult").html("Error: " + err);
@@ -88,11 +88,20 @@ function loadState() {
 
 	var parts = getCookie('list').split('|');
 
-	addList(parts[0], false);
 
-	if (parts.length > 1) {
-		addList(parts[1], true);
-	}
+	$.get("/init").done(function(data) {
+			addList(data.notReady.join('&'));
+		}).fail(function(){
+			addList(parts[0], false);
+
+			if (parts.length > 1) {
+				addList(parts[1], true);
+			}
+            $("#error").html("Error: can't get data from db, loaded from cookie");
+        });
+
+
+/*	*/
 }
 
 function moveTask(li, isComplete) {
@@ -122,12 +131,12 @@ function addTask(val, isComplete) {
 }
 
 $(function () {
-
-	$("#loading").bind("ajaxSend", function(){
-    	$(this).show(); // показываем элемент
-	}).bind("ajaxComplete", function(){
-	    $(this).hide(); // скрываем элемент
-	});
+	// $("#loading").hide();
+	// $("#loading").bind("ajaxSend", function(){
+ //    	$(this).show(); // показываем элемент
+	// }).bind("ajaxComplete", function(){
+	//     $(this).hide(); // скрываем элемент
+	// });
 
 	$('#btn-enter').click(function () {
 		var val = $('#new-todo').val();

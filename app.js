@@ -38,13 +38,23 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res) {
+	Todo.find({"username": "noname"}, "notReady ready", function(err, docs) {
+		res.render('index', {list:docs});
+	});
+});
+
+app.get('/init', function(req, res) {
+	Todo.find({"username": "noname"}, "notReady ready", function(err, docs) {
+		res.send(docs[0]);
+	});
+});
 
 app.post('/', function(req, res) {
 	Todo.update({ "username": "noname"}, req.body, {upsert: true}, function(err, numberAffected, raw) {
 		if (err) console.log('got an error ' + err);
 		console.log('The number of updated documents was %d', numberAffected);
-		console.log('The raw response from Mongo was ' + raw);
+		console.log(raw);
 	});
 	res.send(req.body);
 });

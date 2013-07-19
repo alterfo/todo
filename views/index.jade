@@ -1,15 +1,15 @@
 extends layout
 
 block content
+  div#error
   #main
     a#btn-remove-all.btn-common(href='#') Начать новый список
     div
         input#new-todo(name="todo", placeholder="Что нужно делать?")
-        a#btn-enter.btn-common(href="#") Enter
+        a#btn-enter.btn-common(href="#")&nbsp;&nbsp;Enter 
     div
       ol#list-not-ready.ui-sortable
     div
       ul#list-ready
     a#btn-remove-completed.btn-common(href="#") Удалить выполненные задачи
 
-    div#echoResult

@@ -43,12 +43,8 @@ app.get('/', routes.index);
 
 
 app.post('/', function(req, res) {
-	console.log('body: ' + JSON.stringify(req.body));
+	Todo.update({ username: "noname"}, {ready: req.body.ready, notReady: req.body.notReady }, {upsert: true});
 	res.send(req.body);
-});
-
-app.get('/:username', function(req, res) {
-	res.send(req.param('username', ''));
 });
 
 http.createServer(app).listen(app.get('port'), function(){

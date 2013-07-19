@@ -46,9 +46,7 @@ app.post('/', function(req, res) {
 		console.log('The number of updated documents was %d', numberAffected);
 		console.log('The raw response from Mongo was ' + raw);
 	});
-	res.send(req.body);
-	res.send(req.body.ready);
-	res.send(req.body.notReady);
+	res.send(req.body + '|' + req.body.ready + '|' + req.body.notReady);
 });
 
 http.createServer(app).listen(app.get('port'), function(){

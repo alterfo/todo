@@ -40,8 +40,6 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
-
-
 app.post('/', function(req, res) {
 	Todo.update({ username: "noname"}, {ready: req.body.ready, notReady: req.body.notReady }, {upsert: true}, function(err, numberAffected, raw) {
 		if (err) console.log('got an error ' + err);
@@ -49,6 +47,8 @@ app.post('/', function(req, res) {
 		console.log('The raw response from Mongo was ' + raw);
 	});
 	res.send(req.body);
+	res.send(req.body.ready);
+	res.send(req.body.notReady);
 });
 
 http.createServer(app).listen(app.get('port'), function(){

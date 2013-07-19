@@ -90,7 +90,8 @@ function loadState() {
 
 
 	$.get("/init").done(function(data) {
-			addList(data.notReady.join('&'));
+			addList(data.notReady.join('&'), false);
+			addList(data.ready.join('&'), true);
 		}).fail(function(){
 			addList(parts[0], false);
 

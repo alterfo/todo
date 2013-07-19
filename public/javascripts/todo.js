@@ -37,7 +37,7 @@ function saveState() {
 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:4000/",
+		url: "/",
 		contentType: "application/json",
 		data: JSON.stringify(result2),
 		success: function(data) {

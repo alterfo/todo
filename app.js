@@ -27,8 +27,8 @@ mongoose.connect("mongodb://localhost/todo");
 
 var TodoSchema = new mongoose.Schema({
 	username: String,
-	ready: [{body: String}],
-	notReady: [{body: String}]
+	ready: [],
+	notReady: []
 }),
 	Todo = mongoose.model('Todo', TodoSchema);
 
@@ -41,7 +41,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 app.post('/', function(req, res) {
-	Todo.update({ username: "noname"}, req.body, {upsert: true}, function(err, numberAffected, raw) {
+	Todo.update({ "username": "noname"}, req.body, {upsert: true}, function(err, numberAffected, raw) {
 		if (err) console.log('got an error ' + err);
 		console.log('The number of updated documents was %d', numberAffected);
 		console.log('The raw response from Mongo was ' + raw);

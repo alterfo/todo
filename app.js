@@ -43,7 +43,11 @@ app.get('/', routes.index);
 
 
 app.post('/', function(req, res) {
-	Todo.update({ username: "noname"}, {ready: req.body.ready, notReady: req.body.notReady }, {upsert: true});
+	Todo.update({ username: "noname"}, {ready: req.body.ready, notReady: req.body.notReady }, {upsert: true}, function(err, numberAffected, raw) {
+		if (err) return handleError(err);
+		console.log('The number of updated documents was %d', numberAffected);
+		console.log('The raw response from Mongo was ' + raw);
+	});
 	res.send(req.body);
 });
 

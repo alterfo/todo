@@ -1,7 +1,7 @@
 # Описание
 Простое web-based приложение для ведения списка личных дел. Сделано с использованием node.js, jQuery, mongoose(MongoDB)
 
-[Demo](http://altaviel.ru:4000)
+[Demo](http://demo-todo-app.altaviel.ru)
 
 
 # If you don't understand Russian

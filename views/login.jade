@@ -1,0 +1,14 @@
+extends layout
+
+block content
+ #message #{message}
+  form(method="POST", action="/login", align="center")
+    | Username: #{username}
+    input(type="hidden", name="user", size='15', value="#{username}")
+    br
+    | Password: 
+    input(type="password", name="password", size='15')
+    br
+    div(align="center")
+      p
+        input(type="submit", value="Login")

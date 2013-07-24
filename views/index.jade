@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  if (logout)
+    a(href="/logout") Выход
+
   div#error
   #main
     a#btn-remove-all.btn-common(href='#') Начать новый список
